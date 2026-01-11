@@ -66,8 +66,10 @@ The model shows high sensitivity to pneumonia cases (Recall = 100%), which is de
 python -m src.Train
 
 
-## Weights saved to:
-weights/best_model.pth
+## 📦 Pretrained Weights (Optional)
+The pretrained model weights are available for download here:
+👉 [Download best_model.pth](https://drive.google.com/uc?id=1JtclcvVfgmvUwFwyX0rNN3HqOa8fuEOI)
+After downloading, **place the file inside the `weights/` directory**:
 
 ## 🔍 Evaluation
 python -m src.evaluate
