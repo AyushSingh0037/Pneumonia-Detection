@@ -205,3 +205,14 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# ML project artifacts
+weights/
+data/
+logs/
+outputs/
+runs/
+*.pth
+*.pt
+*.onnx
+*.ckpt
