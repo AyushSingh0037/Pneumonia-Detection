@@ -9,10 +9,10 @@ from sklearn.metrics import (
     classification_report
 )
 
-from model import src.build_model
+from src.model import build_model
 
 
-def evaluate_best_model(dataloader, device, model_path="best_model.pth"):
+def evaluate_best_model(dataloader, device, model_path="weights/best_model.pth"):
     
   model = build_model().to(device)
   model.load_state_dict(torch.load(model_path, map_location=device))
