@@ -12,7 +12,7 @@ class EarlyStopping:
         if val_loss < self.best_loss - self.min_delta:
             self.best_loss = val_loss
             self.counter = 0
-            torch.save(model.state_dict(), "best_model.pth")
+            torch.save(model.state_dict(), "weights/best_model.pth")
         else:
             self.counter += 1
             print(f"Validation not improving ({self.counter}/{self.patience})")
