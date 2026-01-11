@@ -9,7 +9,7 @@ from sklearn.metrics import (
     classification_report
 )
 
-from model import build_model
+from model import src.build_model
 
 
 def evaluate_best_model(dataloader, device, model_path="best_model.pth"):
