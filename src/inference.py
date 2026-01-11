@@ -2,7 +2,7 @@ import torch
 from torchvision import transforms
 from PIL import Image
 
-from model import build_model
+from src.model import build_model
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -15,7 +15,7 @@ inference_transform = transforms.Compose([
   )
 ])
 
-def load_model(model_path="best_model.pth"):
+def load_model(model_path="weights/best_model.pth"):
   model = build_model().to(device)
   model.load_state_dict(torch.load(model_path, map_location=device))
   model.eval()
@@ -47,5 +47,5 @@ if __name__ == "__main__":
   image_path = "sample_xray.jpg"  # 👈 change this
   result = predict_image(image_path, model)
 
-  print("🩺 Prediction:", result["prediction"])
-  print("🔍 Confidence:", result["confidence"], "%")
+  print("Prediction:", result["prediction"])
+  print("Confidence:", result["confidence"], "%")
