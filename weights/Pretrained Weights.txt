@@ -1,0 +1,5 @@
+📦 Pretrained Weights-
+
+The pretrained model weights are available for download here:
+👉 [Download best_model.pth](https://drive.google.com/uc?id=1JtclcvVfgmvUwFwyX0rNN3HqOa8fuEOI)
+After downloading, **place the file inside the `weights/` directory**:
