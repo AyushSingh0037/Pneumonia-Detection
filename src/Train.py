@@ -1,6 +1,6 @@
 import torch
-from earlystopping import EarlyStopping
-from Validation import validate
+from src.earlystopping import EarlyStopping
+from src.Validation import validate
 
 def train_model(model, train_loader, val_loader, optimizer, criterion, device):
     early_stopping = EarlyStopping(patience=3)
