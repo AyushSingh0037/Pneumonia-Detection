@@ -1,147 +1,186 @@
-🫁 Pneumonia Detection from Chest X-ray
+# 🫁 Pneumonia Detection from Chest X-ray
 
-Deep learning system for classifying Chest X-ray images into NORMAL vs PNEUMONIA using a transfer-learning based ResNet-18 architecture implemented with PyTorch, and an inference UI built with Streamlit.
+Deep learning system for classifying Chest X-ray images into **NORMAL** vs **PNEUMONIA** using a transfer-learning based **ResNet-18** architecture implemented with **PyTorch**, and an inference UI built with **Streamlit**.
 
-📂 Dataset
+---
 
-This project uses the Chest X-Ray Pneumonia Dataset from Kaggle:
+## 📂 Dataset
+
+This project uses the **Chest X-Ray Pneumonia Dataset** from Kaggle:  
 https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia
 
-Dataset Structure:
-
+**Dataset structure:**
 chest_xray/
 ├── train/
 ├── val/
 └── test/
 
+**Classes:**
+- NORMAL (label = 0)
+- PNEUMONIA (label = 1)
 
-Classes:
+---
 
-NORMAL (label = 0)
+## 🧠 Model Architecture
 
-PNEUMONIA (label = 1)
+Base model: **ResNet-18** pretrained on ImageNet.
 
-🧠 Model Architecture
-
-Base model: ResNet-18 pretrained on ImageNet.
-
-Modifications:
-
+**Modifications:**
+```python
 model.fc = nn.Sequential(
     nn.Linear(512, 128),
     nn.ReLU(),
     nn.Dropout(0.3),
     nn.Linear(128, 2)
 )
+```
 
+---
+## 📊 Evaluation Results
+The model achieved the following performance on the validation set:
+Metric	Score
+Accuracy	93.75%
+Precision	88.89%
+Recall	100%
+F1-Score	94.12%
 
-Training strategy:
+---
+## Training strategy:
 
 Transfer learning (frozen backbone)
-
 Early stopping on validation loss
-
 Cross-entropy loss
-
 Adam optimizer
 
-📊 Evaluation Metrics
+---
+## Confusion Matrix
 
-The model reports:
+            Pred Normal | Pred Pneumonia
+True Normal      7      |       1
+True Pneumonia   0      |       8
 
-✔ Accuracy
-✔ Precision
-✔ Recall
-✔ F1-score
-✔ Confusion Matrix
-✔ Classification Report
 
-Example output:
+The model shows high sensitivity to pneumonia cases (Recall = 100%), which is desirable in medical screening applications where false negatives are costly.
 
-Accuracy: 0.93
-Precision: 0.94
-Recall: 0.92
-F1-score: 0.93
-
-🖥 Training
-
-To train:
-
+## 🖥 Training
 python -m src.Train
 
 
-Weights are saved to:
-
+## Weights saved to:
 weights/best_model.pth
 
-🔍 Evaluation
-
-To evaluate the best model:
-
+## 🔍 Evaluation
 python -m src.evaluate
 
-🧪 Inference (Programmatic)
+# Pneumonia Detection from Chest X-ray
+
+A deep learning system for detecting pneumonia from chest X-ray images using transfer learning with a ResNet-18 backbone implemented in PyTorch. Includes a Streamlit-based inference UI for real-time prediction.
+
+---
+
+## Evaluation Results
+
+Validation set results:
+
+| Metric     | Score    |
+|------------|----------|
+| Accuracy   | 93.75%   |
+| Precision  | 88.89%   |
+| Recall     | 100%     |
+| F1-Score   | 94.12%   |
+
+Confusion Matrix:
+
+```
+                 Pred NORMAL | Pred PNEUMONIA
+True NORMAL          7       |        1
+True PNEUMONIA       0       |        8
+```
+
+Clinical note:  
+The model achieves high recall for pneumonia (100%), which aligns with medical screening requirements where false negatives are costly.
+
+---
+
+## Training
+
+Run training:
+
+```bash
+python -m src.Train
+```
+
+Best weights saved to:
+
+```
+weights/best_model.pth
+```
+
+---
+
+## Evaluation
+
+Run evaluation:
+
+```bash
+python -m src.evaluate
+```
+
+---
+
+## Inference (Programmatic)
+
+```python
 from src.inference import load_model, predict_image
 
 model = load_model("weights/best_model.pth")
 result = predict_image("sample_xray.jpg", model)
 print(result)
+```
 
+Example output:
 
-Output:
-
+```
 {'prediction': 'PNEUMONIA', 'confidence': 97.3}
+```
 
-🖥 Streamlit Application
+---
 
-Run locally:
+## Streamlit Application
 
+Run interactive UI:
+
+```bash
 streamlit run app.py
+```
 
+Deployment options:
+- Streamlit Cloud
+- HuggingFace Spaces
 
-This opens an interface where you can upload an X-ray and get predictions.
+---
 
-☁️ Deployment (Optional)
+## Installation
 
-You can deploy on:
+Install dependencies:
 
-Streamlit Cloud
-
-Push repo to GitHub
-
-Go to https://share.streamlit.io
-
-Connect repo
-
-Select app.py
-
-Deploy
-
-HuggingFace Spaces
-
-Supports:
-
-streamlit
-
-gradio
-
-📦 Requirements
-
-Create virtual env and install deps:
-
+```bash
 pip install -r requirements.txt
+```
 
+Core packages:
+- torch
+- torchvision
+- numpy
+- scikit-learn
+- pillow
+- streamlit
 
-Minimal requirements:
+---
 
-torch
-torchvision
-numpy
-scikit-learn
-pillow
-streamlit
+## Project Structure
 
-📁 Project Structure
+```
 Pneumonia-Detection/
 ├── src/
 │   ├── Train.py
@@ -153,14 +192,27 @@ Pneumonia-Detection/
 ├── weights/
 │   └── best_model.pth
 ├── app.py
-├── README.md
-└── requirements.txt
+├── requirements.txt
+└── README.md
+```
 
-📌 Notes
+---
 
-⚠️ Dataset not included — download from Kaggle and place under data/
-⚠️ Weights not included — generated after training
+## Notes
 
-📜 License
+- Dataset must be downloaded manually from Kaggle.
+- Weights are generated after running training.
+- Streamlit UI is optional but useful for demonstration.
 
-MIT License – Free for academic and commercial use.
+---
+
+## License
+
+MIT License
+
+---
+## 🌍 Live Demo
+
+Try the live model here:  
+https://huggingface.co/spaces/AyushSingh0037/pneumonia-xray-detector
+
